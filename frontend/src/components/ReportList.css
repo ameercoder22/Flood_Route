@@ -1,0 +1,127 @@
+.report-list {
+  background: white;
+  padding: 20px;
+  border-radius: 8px;
+  box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+}
+
+.report-list h3 {
+  margin: 0 0 15px 0;
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+
+.empty-reports {
+  background: #f5f5f5;
+  padding: 20px;
+  border-radius: 4px;
+  text-align: center;
+  color: #999;
+  font-size: 13px;
+}
+
+.reports-container {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 400px;
+  overflow-y: auto;
+}
+
+.reports-container::-webkit-scrollbar {
+  width: 6px;
+}
+
+.reports-container::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+.reports-container::-webkit-scrollbar-thumb {
+  background: #ddd;
+  border-radius: 3px;
+}
+
+.reports-container::-webkit-scrollbar-thumb:hover {
+  background: #999;
+}
+
+.report-item {
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 12px;
+  font-size: 13px;
+  transition: box-shadow 0.2s, border-color 0.2s;
+}
+
+.report-item:hover {
+  border-color: #ccc;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+}
+
+.report-header {
+  display: flex;
+  gap: 8px;
+  align-items: center;
+  margin-bottom: 10px;
+  flex-wrap: wrap;
+}
+
+.severity-badge {
+  padding: 4px 8px;
+  border-radius: 3px;
+  color: white;
+  font-size: 11px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.source-badge {
+  padding: 4px 8px;
+  border-radius: 3px;
+  background: #e3f2fd;
+  color: #1565c0;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.3px;
+}
+
+.demo-badge {
+  background: #fff3e0;
+  color: #e65100;
+  font-weight: 700;
+}
+
+.time {
+  font-size: 11px;
+  color: #999;
+  margin-left: auto;
+  font-weight: 500;
+}
+
+.report-body p {
+  margin: 6px 0;
+}
+
+.report-body p:first-child {
+  margin-top: 0;
+}
+
+.report-body strong {
+  font-weight: 700;
+  color: #333;
+}
+
+.description {
+  color: #666;
+  line-height: 1.4;
+  margin: 8px 0;
+}
+
+.report-item small {
+  color: #999;
+  font-size: 11px;
+}
+
