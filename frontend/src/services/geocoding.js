@@ -123,13 +123,12 @@ export async function geocode(query, signal) {
     return []
   }
 
-  const params = new URLSearchParams({
-    q: query,
-    format: 'json',
-    addressdetails: '1',
-    limit: '20', // Get more results to filter
-    countrycodes: 'in', // Focus on India for FloodRoute
-  })
+    const params = new URLSearchParams({
+      q: query,
+      format: 'json',
+      addressdetails: '1',
+      limit: '20', // Get more results to filter
+    })
 
   try {
     const response = await fetch(`${NOMINATIM_URL}?${params}`, {

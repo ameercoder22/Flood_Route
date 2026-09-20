@@ -2,18 +2,16 @@ console.log("DEBUG: API_BASE_URL=", import.meta.env.VITE_API_BASE_URL); const AP
 
 export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
   // Normalize route coordinates to only include latitude and longitude
-  // (strip any extra fields like 'name' that the backend schema rejects)
   const normalizedRoute = routeCoordinates.map(point => ({
     latitude: point.latitude,
     longitude: point.longitude
   }))
 
-  const response = await fetch(`${API_BASE_URL}/reports/near-route`, {
+  const response = await fetch(`${API_BASE_URL}/flood/analyze-route`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({
-      route: normalizedRoute,
-      radius_meters: radiusMeters
+      route: normalizedRoute
     })
   })
 
@@ -35,10 +33,10 @@ export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
   }
 
   return {
-    routeRisk: data.route_risk,
-    riskScore: data.risk_score,
-    affectedSegments: data.affected_segments,
-    summary: data.summary
+    routeRisk: data.flood_analysis.flood_exposure_percentage > 50 ? 'HIGH_REPORTED_RISK' : (data.flood_analysis.flood_exposure_percentage > 10 ? 'MEDIUM_REPORTED_RISK' : 'LOW_REPORTED_RISK'),
+    riskScore: data.flood_analysis.flood_exposure_percentage,
+    affectedSegments: [],
+    summary: { active_reports: 0 }
   }
 }
 

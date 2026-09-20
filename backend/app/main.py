@@ -11,6 +11,7 @@ from starlette.exceptions import HTTPException as StarletteHTTPException
 
 from app.api.health import router as health_router
 from app.api.reports import router as reports_router
+from app.api.flood import router as flood_router
 from app.config import get_settings
 from app.schemas.report import Condition, ReportSource, ReportStatus, Severity, StoredReport, VehicleImpact
 from app.repositories.report_repository import DynamoDBReportRepository, InMemoryReportRepository
@@ -89,8 +90,15 @@ if settings.demo_mode:
     s3_service = None
 else:
     repository = DynamoDBReportRepository(settings.aws_region, settings.dynamodb_table_name) if settings.aws_region and settings.dynamodb_table_name else InMemoryReportRepository()
-    settings.require_aws("aws_region", "bedrock_model_id")
-    ai_provider = BedrockService(settings.aws_region, settings.bedrock_model_id)
+
+    # Conditional Bedrock/AWS validation: only if Bedrock is actually enabled
+    if settings.bedrock_model_id:
+        settings.require_aws("aws_region", "bedrock_model_id")
+        ai_provider = BedrockService(settings.aws_region, settings.bedrock_model_id)
+    else:
+        ai_provider = MockProvider()
+        logger.warning("Bedrock not configured, using MockProvider for AI services.")
+
     s3_service = S3Service(settings.aws_region, settings.s3_bucket_name, settings.s3_presigned_url_expiry) if settings.aws_region and settings.s3_bucket_name else None
 
 report_service = ReportService(
@@ -115,6 +123,7 @@ app.add_middleware(
 )
 app.include_router(health_router)
 app.include_router(reports_router)
+app.include_router(flood_router)
 
 
 @app.exception_handler(StarletteHTTPException)
