@@ -1,4 +1,4 @@
-console.log("DEBUG: API_BASE_URL=", import.meta.env.VITE_API_BASE_URL); const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
 
 export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
   // Normalize route coordinates to only include latitude and longitude
@@ -7,7 +7,6 @@ export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
     longitude: point.longitude
   }))
 
-  console.log('DEBUG: Fetching URL:', `${API_BASE_URL}/flood/analyze-route`)
   const response = await fetch(`${API_BASE_URL}/flood/analyze-route`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
