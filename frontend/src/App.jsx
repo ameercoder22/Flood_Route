@@ -118,6 +118,7 @@ export default function App() {
             mapCenter={mapCenter}
             onMapClick={handleMapClick}
             showReportMode={showReportForm}
+            selectedReportLocation={selectedReportLocation}
           />
 
           <div className="sidebar">

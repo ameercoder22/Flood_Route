@@ -42,7 +42,8 @@ export default function MapView({
   reports,
   mapCenter,
   onMapClick,
-  showReportMode
+  showReportMode,
+  selectedReportLocation
 }) {
   const polylineColor = routeRisk?.routeRisk?.includes('HIGH')
     ? '#cc0000'
@@ -59,6 +60,13 @@ export default function MapView({
         />
 
         {showReportMode && <MapClickHandler onMapClick={onMapClick} showReportMode={showReportMode} />}
+
+        {showReportMode && selectedReportLocation && (
+          <Marker
+            position={[selectedReportLocation.latitude, selectedReportLocation.longitude]}
+            icon={createIcon('reportLocation')}
+          />
+        )}
 
         {route && (
           <Polyline

@@ -1,4 +1,4 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import './ReportForm.css'
 
 const CONDITIONS = ['NORMAL', 'WATERLOGGED', 'FLOODED', 'ROAD_BLOCKED', 'UNKNOWN']
@@ -7,6 +7,14 @@ const VEHICLES = ['NONE_REPORTED', 'POSSIBLE', 'TWO_WHEELERS_LIKELY_AFFECTED', '
 export default function ReportForm({ selectedLocation, onSubmit, loading }) {
   const [latitude, setLatitude] = useState(selectedLocation?.latitude || '')
   const [longitude, setLongitude] = useState(selectedLocation?.longitude || '')
+
+  useEffect(() => {
+    if (selectedLocation) {
+        setLatitude(selectedLocation.latitude)
+        setLongitude(selectedLocation.longitude)
+    }
+  }, [selectedLocation])
+
   const [description, setDescription] = useState('')
   const [condition, setCondition] = useState('FLOODED')
   const [image, setImage] = useState(null)
@@ -74,7 +82,7 @@ export default function ReportForm({ selectedLocation, onSubmit, loading }) {
         <div className="location-display">
           {latitude && longitude ? (
             <div>
-              <span>{latitude.toFixed(4)}, {longitude.toFixed(4)}</span>
+              <span>{parseFloat(latitude).toFixed(4)}, {parseFloat(longitude).toFixed(4)}</span>
               <button
                 type="button"
                 className="change-location-btn"
