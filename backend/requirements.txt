@@ -10,3 +10,4 @@ httpx
 shapely
 geopandas
 rasterio
+earthaccess
