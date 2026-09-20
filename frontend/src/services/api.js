@@ -1,4 +1,6 @@
-const API_BASE_URL = import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+const API_BASE_URL = (
+  import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000'
+).replace(/\/+$/, '')
 
 export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
   // Normalize route coordinates to only include latitude and longitude
