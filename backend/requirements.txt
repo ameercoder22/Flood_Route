@@ -1,6 +1,7 @@
 fastapi
 uvicorn[standard]
-boto3
+boto3==1.43.75
+botocore==1.43.75
 pydantic
 pydantic-settings
 python-dotenv
@@ -10,4 +11,4 @@ httpx
 shapely
 geopandas
 rasterio
-earthaccess
+earthaccess==0.13.0
