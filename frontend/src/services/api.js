@@ -7,6 +7,7 @@ export async function checkRouteRisk(routeCoordinates, radiusMeters = 100) {
     longitude: point.longitude
   }))
 
+  console.log('DEBUG: Fetching URL:', `${API_BASE_URL}/flood/analyze-route`)
   const response = await fetch(`${API_BASE_URL}/flood/analyze-route`, {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
