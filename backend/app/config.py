@@ -15,6 +15,9 @@ class Settings(BaseSettings):
     s3_bucket_name: str = ""
     dynamodb_table_name: str = "FloodReports"
     bedrock_model_id: str = ""
+    nasa_api_key: str = ""
+    nasa_earthdata_username: str = ""
+    nasa_earthdata_password: str = ""
     max_upload_size_mb: float = Field(default=5.0, gt=0, le=20)
     allowed_image_types: str = "image/jpeg,image/png,image/webp"
     cors_origins: str = "http://localhost:5173"

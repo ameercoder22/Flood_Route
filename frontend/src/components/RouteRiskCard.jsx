@@ -59,8 +59,7 @@ export default function RouteRiskCard({ routeRisk }) {
 
       <div className="risk-disclaimer">
         <p>
-          <strong>Note:</strong> This assessment is based on recent reported
-          conditions near your route. Actual road conditions may differ. Always exercise caution and check official emergency alerts.
+          Reported risk is based on available recent reports near the route and does not guarantee current road conditions.
         </p>
       </div>
     </div>
